@@ -1,0 +1,58 @@
+<assembly>
+    <id>bin-01</id>
+    <formats>
+        <format>dir</format>
+    </formats>
+
+
+    <fileSets>
+
+        <!-- Feature repository -->
+        <fileSet>
+            <directory>${basedir}/../features/target/</directory>
+            <includes>
+                <include>*.xml</include>
+            </includes>
+            <outputDirectory>/local-repo/features</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../features/target/local-repo</directory>
+            <outputDirectory>/local-repo</outputDirectory>
+            <filtered>false</filtered>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/main/resources/${karaf.version}</directory>
+            <includes>
+                <include>*</include>
+            </includes>
+            <outputDirectory>/etc</outputDirectory>
+            <filtered>true</filtered>
+        </fileSet>
+        <!-- Expanded Karaf Standard Distribution -->
+        <fileSet>
+            <directory>${basedir}/../karaf-unpacking/target/${target.os}/apache-karaf-${karaf.version}
+            </directory>
+            <outputDirectory>/</outputDirectory>
+            <excludes>
+                <exclude>bin/**</exclude>
+            </excludes>
+        </fileSet>
+        <!-- Copy over bin/* separately to get the correct file mode -->
+        <fileSet>
+            <directory>${basedir}/../karaf-unpacking/target/${target.os}/apache-karaf-${karaf.version}
+            </directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>bin/**</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../branding/target</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>/lib</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

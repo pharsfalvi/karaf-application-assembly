@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>karaf.apache-karaf</artifactId>
+  <name>Apache Karaf unpacking for Customization</name>
+
+  <parent>
+      <artifactId>karaf</artifactId>
+      <groupId>com.qtc.demo</groupId>
+      <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <packaging>pom</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.karaf</groupId>
+      <artifactId>apache-karaf</artifactId>
+      <version>${karaf.version}</version>
+      <type>${distro.type}</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-bin</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.apache.karaf</groupId>
+                  <artifactId>apache-karaf</artifactId>
+                  <type>tar.gz</type>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}/${target.os}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

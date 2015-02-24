@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>features</artifactId>
+    <name>Demo Features</name>
+
+    <parent>
+        <artifactId>karaf</artifactId>
+        <groupId>com.qtc.demo</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <packaging>pom</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>filter-assembly-descriptors</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/features</directory>
+                                    <includes>
+                                        <include>*.xml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-features-to-local-repo</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>features-add-to-repository</goal>
+                        </goals>
+                        <configuration>
+                            <workDirectory>${project.build.directory}</workDirectory>
+                            <karafVersion>${karaf.version}</karafVersion>
+                            <descriptors>
+                                <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/enterprise/${karaf.version}/xml/features</descriptor>
+                                <descriptor>file:${basedir}/target/demo-features.xml</descriptor>
+                            </descriptors>
+                            <features>
+                                <feature>demo</feature>
+                            </features>
+                            <repository>target/local-repo</repository>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

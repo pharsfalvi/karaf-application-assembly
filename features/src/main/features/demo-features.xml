@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features>
+
+    <!--======================================================================-->
+    <!-- DEMO FEATURES                                                  -->
+    <!--======================================================================-->
+    <repository>mvn:org.apache.karaf.features/spring/${karaf.version}/xml/features</repository>
+    <repository>mvn:org.ops4j.pax.web/pax-web-features/${pax-web-features.version}/xml/features</repository>
+    <repository>mvn:org.apache.activemq/activemq-karaf/${activemq.version}/xml/features-core</repository>
+    <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
+    <repository>mvn:org.drools/drools-karaf-features/${drools.version}/xml/features</repository>
+
+    <feature name="demo" version="${project.version}">
+        <!-- This feature pulls in some features defined in the above repositories-->
+        <feature version="${camel.version}">camel</feature>
+        <feature version="${activemq.version}">activemq</feature>
+        <feature version="${drools.version}">drools-module</feature>
+    </feature>
+</features>
+
+

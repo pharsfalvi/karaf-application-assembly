@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>karaf</artifactId>
+    <groupId>com.qtc.demo</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Karaf Demo Distribution (based on Karaf ${karaf.version})</name>
+
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <nix.assembly.artifact>karaf-${karaf.version}-demo-${project.version}-${maven.build.timestamp}
+        </nix.assembly.artifact>
+        <karaf.version>3.0.2</karaf.version>
+        <maven-bundle-plugin.version>2.3.7</maven-bundle-plugin.version>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>2.6</maven-resources-plugin.version>
+
+        <karaf.assembly.artifact>karaf-distro-demo-${project.version}</karaf.assembly.artifact>
+
+
+        <pax-web-features.version>3.1.2</pax-web-features.version>
+        <activemq.version>5.10.0</activemq.version>
+        <camel.version>2.10.3</camel.version>
+        <drools.version>6.1.0.Final</drools.version>
+    </properties>
+
+    <modules>
+        <module>karaf-unpacking</module>
+        <module>branding</module>
+        <module>assemble</module>
+        <module>features</module>
+    </modules>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.karaf.tooling</groupId>
+                    <artifactId>karaf-maven-plugin</artifactId>
+                    <version>${karaf.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>filter</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>resources</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <profiles>
+        <!-- Setting the target.os variable -->
+        <profile>
+            <id>unix-os</id>
+            <activation>
+                <property>
+                    <name>!target.os</name>
+                </property>
+            </activation>
+            <properties>
+                <target.os>unix</target.os>
+                <distro.type>tar.gz</distro.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows-os</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <target.os>windows</target.os>
+                <distro.type>zip</distro.type>
+            </properties>
+        </profile>
+    </profiles>
+</project>

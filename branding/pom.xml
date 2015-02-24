@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>karaf.branding</artifactId>
+  <name>Karaf Branding</name>
+
+  <parent>
+      <artifactId>karaf</artifactId>
+      <groupId>com.qtc.demo</groupId>
+      <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <packaging>bundle</packaging>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${maven-bundle-plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>manual</Bundle-SymbolicName>
+            <Import-Package>*</Import-Package>
+            <Private-Package>!*</Private-Package>
+            <Export-Package>
+              org.apache.karaf.branding
+            </Export-Package>
+            <Spring-Context>*;public-context:=false</Spring-Context>
+              <_removeheaders>Require-Capability,Include-Resource</_removeheaders>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
