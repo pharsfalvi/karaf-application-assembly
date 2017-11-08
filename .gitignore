@@ -1,5 +1,7 @@
 *.iml
 .idea/
+.classpath
+effective.pom
 **/src/main/generated/
 **/target/
 pom.xml.tag

@@ -1,5 +1,5 @@
 <assembly>
-    <id>bin-01</id>
+    <id>bin01</id>
     <formats>
         <format>dir</format>
     </formats>

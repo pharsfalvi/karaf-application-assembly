@@ -15,18 +15,14 @@
     <properties>
         <nix.assembly.artifact>karaf-${karaf.version}-demo-${project.version}-${maven.build.timestamp}
         </nix.assembly.artifact>
-        <karaf.version>3.0.2</karaf.version>
-        <maven-bundle-plugin.version>2.3.7</maven-bundle-plugin.version>
-        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>2.6</maven-resources-plugin.version>
+        <karaf.version>4.1.3</karaf.version>
+        <maven-bundle-plugin.version>3.3.0</maven-bundle-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
+        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
 
         <karaf.assembly.artifact>karaf-distro-demo-${project.version}</karaf.assembly.artifact>
-
-
-        <pax-web-features.version>3.1.2</pax-web-features.version>
-        <activemq.version>5.10.0</activemq.version>
-        <camel.version>2.10.3</camel.version>
-        <drools.version>6.1.0.Final</drools.version>
     </properties>
 
     <modules>
@@ -44,6 +40,16 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven-dependency-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.karaf.tooling</groupId>

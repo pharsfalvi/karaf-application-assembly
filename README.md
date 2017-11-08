@@ -11,7 +11,7 @@ This demo project puts together a customized karaf build with some pre-defined f
 
   * Branded console
   * Prebuilt offline repository, installed as part of the container
-  * Preconfigured to run equinox OSGi container
+  * Preconfigured to run felix OSGi container
   * Customized instance name
   * Based on karaf 3.0.2
   * Windows and Unix support

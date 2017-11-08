@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>karaf.assemble</artifactId>
-  <name>Karaf Container Assemble (based on Apache Karaf ${karaf.version})</name>
+    <artifactId>karaf-demo</artifactId>
+    <name>Karaf Container Assemble (based on Apache Karaf ${karaf.version})</name>
 
-  <parent>
-      <artifactId>karaf</artifactId>
-      <groupId>com.qtc.demo</groupId>
-      <version>1.0.0-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <artifactId>karaf</artifactId>
+        <groupId>com.qtc.demo</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-  <dependencies>
-      <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>features</artifactId>
-          <version>${project.version}</version>
-      </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>features</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
 
-  </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>bin</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <escapeString>\</escapeString>
-              <descriptors>
-                <descriptor>${basedir}/src/main/descriptors/${target.os}-bin.xml</descriptor>
-              </descriptors>
-              <appendAssemblyId>false</appendAssemblyId>
-              <tarLongFileMode>gnu</tarLongFileMode>
-              <finalName>${karaf.assembly.artifact}</finalName>
-              <attach>false</attach>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>bin</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <escapeString>\</escapeString>
+                            <descriptors>
+                                <descriptor>${basedir}/src/main/descriptors/${target.os}-bin.xml</descriptor>
+                            </descriptors>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <tarLongFileMode>gnu</tarLongFileMode>
+                            <attach>true</attach>
+                            <finalName>${karaf.assembly.artifact}</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
